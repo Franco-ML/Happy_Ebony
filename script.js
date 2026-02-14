@@ -174,18 +174,3 @@ const users = [
 
 
 
-const comentarios = [
-    {
-        id: 1,
-        mensaje: "Aaah, se partió la calle",
-        tipo: "baches",
-        user_id: 19278879123
-    },
-    {
-        id: 2,
-        mensaje: "Niggers, juajsaus",
-        tipo: "alcantarillados",
-        user_id: 3
-    },
-]
-
