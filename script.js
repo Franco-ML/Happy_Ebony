@@ -147,3 +147,45 @@ function createFloatingHeart() {
 for (let i = 0; i < 5; i++) {
     createFloatingHeart();
 }
+
+
+
+
+
+const users = [
+    {
+        id: 19278879123,
+        name: "Gerald",
+        rol: "admin"
+    },
+    {
+        id: 2,
+        name: "Harry",
+        rol: "cliente"
+    },
+    {
+        id: 3,
+        name: "Gonzales",
+        email: "ahibsua@gmail.com",
+        password: 1234,
+        rol: "cliente"
+    },
+]
+
+
+
+const comentarios = [
+    {
+        id: 1,
+        mensaje: "Aaah, se partió la calle",
+        tipo: "baches",
+        user_id: 19278879123
+    },
+    {
+        id: 2,
+        mensaje: "Niggers, juajsaus",
+        tipo: "alcantarillados",
+        user_id: 3
+    },
+]
+
