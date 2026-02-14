@@ -163,25 +163,12 @@ const noTexts = [
     "¡Di que sí!"
 ];
 
-const questionGif = document.getElementById('questionGif');
-
-// GIFs tristes para el botón "No" (Verificando que sean del oso MOCHA - el marrón)
-const sadGifs = [
-    "https://media.tenor.com/_MJO863M_sQAAAAi/milk-and-mocha-bear.gif", // Mocha crying at table
-    "https://media.tenor.com/15822365/milk-and-mocha-bear-crying-sad-gif", // Mocha crying hard
-    "https://media.tenor.com/26511675/mocha-crying-gif", // Mocha crying on floor
-    "https://media.tenor.com/18012648/milk-and-mocha-crying-sad-gif", // Mocha sobbing
-    "https://media.tenor.com/13233816/milk-mocha-milk-and-mocha-bears-please-plz.gif" // Mocha pleasing
-];
-
 btnNo.addEventListener('click', () => {
     noClickCount++;
 
     // Hacer más pequeño el botón No
     const currentSizeNo = 1 - (noClickCount * 0.1);
     btnNo.style.transform = `scale(${Math.max(0, currentSizeNo)})`;
-
-    // Si se hace muy pequeño, ocultarlo o moverlo (opcional, por ahora solo escala)
 
     // Hacer más grande el botón Sí
     const currentSizeYes = 1 + (noClickCount * 0.5);
@@ -191,10 +178,6 @@ btnNo.addEventListener('click', () => {
     if (noClickCount < noTexts.length) {
         btnNo.innerText = noTexts[noClickCount];
     }
-
-    // Cambiar GIF a uno triste (ciclando)
-    const gifIndex = (noClickCount - 1) % sadGifs.length;
-    questionGif.src = sadGifs[gifIndex];
 });
 
 btnYes.addEventListener('click', () => {

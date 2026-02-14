@@ -80,6 +80,11 @@ body {
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
+.main-screen {
+    min-height: 100vh;
+    height: auto;
+}
+
 .lock-screen.active,
 .main-screen.active {
     opacity: 1;
@@ -561,13 +566,8 @@ body {
 }
 
 .lock-body::before {
-    content: '🔒';
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    opacity: 0.6;
+    content: '';
+    display: none;
 }
 
 .lock-title {
@@ -670,8 +670,11 @@ body {
 /* ============ PANTALLA PRINCIPAL (ROSAS) ============ */
 .main-screen {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 40px 0;
 }
 
 .container {
@@ -1126,14 +1129,14 @@ body {
 .gif-bottom-left {
     bottom: 20px;
     left: 20px;
-    width: 150px;
+    width: 200px;
     animation: floatGif 3s ease-in-out infinite;
 }
 
 .gif-bottom-right {
     bottom: 20px;
     right: 20px;
-    width: 140px;
+    width: 190px;
     transform: scaleX(-1);
     /* Espejo para mirar al centro */
     animation: floatGif 3s ease-in-out infinite 0.5s;
@@ -1142,7 +1145,7 @@ body {
 .gif-top-right {
     top: -20px;
     right: 40px;
-    width: 100px;
+    width: 140px;
     animation: swingGif 4s ease-in-out infinite;
     transform-origin: top center;
 }
@@ -1191,8 +1194,8 @@ body {
 /* Ocultar en móviles muy pequeños si molestan */
 @media (max-width: 480px) {
     .decorative-gif {
-        width: 100px;
-        opacity: 0.6;
+        width: 130px;
+        opacity: 0.7;
     }
 
     .gif-top-right {
@@ -1264,5 +1267,249 @@ body {
         width: 40px;
         height: 40px;
         font-size: 20px;
+    }
+}
+
+/* ============ SECCIÓN DE FOTO CON FLORES Y CORAZONES ============ */
+.photo-section {
+    position: relative;
+    margin-top: 60px;
+    padding: 40px 20px;
+    animation: fadeIn 1.5s ease-in 0.8s both;
+}
+
+.photo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.photo-frame {
+    position: relative;
+    width: min(300px, 70vw);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(216, 27, 96, 0.3),
+        0 0 0 4px #d81b60,
+        0 0 0 8px #ff4081;
+    animation: photoGlow 3s ease-in-out infinite;
+}
+
+@keyframes photoGlow {
+    0%, 100% {
+        box-shadow:
+            0 10px 30px rgba(216, 27, 96, 0.3),
+            0 0 0 4px #d81b60,
+            0 0 0 8px #ff4081;
+    }
+    50% {
+        box-shadow:
+            0 10px 40px rgba(216, 27, 96, 0.5),
+            0 0 0 4px #d81b60,
+            0 0 0 8px #ff4081,
+            0 0 20px rgba(255, 64, 129, 0.3);
+    }
+}
+
+.couple-photo {
+    width: 100%;
+    display: block;
+    border-radius: 16px;
+}
+
+/* Mini flores decorativas al lado de la foto */
+.photo-flower {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mini-stem {
+    width: 4px;
+    height: 80px;
+    background: linear-gradient(to bottom, #4a7c2c, #2d5016);
+    border-radius: 2px;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.mini-flower {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    animation: bloom 2s ease-in-out infinite;
+}
+
+.mini-petal {
+    position: absolute;
+    width: 22px;
+    height: 28px;
+    background: radial-gradient(ellipse at center, #ff4081 0%, #d81b60 60%, #ad1457 100%);
+    border-radius: 50% 50% 50% 0;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 100%;
+    box-shadow: inset -3px -3px 6px rgba(173, 20, 87, 0.5);
+}
+
+.mp-1 { transform: translate(-50%, -50%) rotate(0deg); }
+.mp-2 { transform: translate(-50%, -50%) rotate(72deg); }
+.mp-3 { transform: translate(-50%, -50%) rotate(144deg); }
+.mp-4 { transform: translate(-50%, -50%) rotate(216deg); }
+.mp-5 { transform: translate(-50%, -50%) rotate(288deg); }
+
+.mini-center {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle, #ffeb3b 0%, #ffd600 50%, #d81b60 100%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Variantes de animación para las flores laterales */
+.photo-flower-left .mini-stem { animation-delay: 0.3s; }
+.photo-flower-right .mini-stem { animation-delay: 0.7s; }
+.photo-flower-left-2 .mini-stem { animation-delay: 1s; }
+.photo-flower-right-2 .mini-stem { animation-delay: 1.4s; }
+.photo-flower-left-2 .mini-flower { animation-delay: 0.5s; }
+.photo-flower-right-2 .mini-flower { animation-delay: 0.9s; }
+
+/* Columna de flores a los lados */
+.flowers-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Filas de flores arriba y abajo de la foto */
+.flowers-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 25px;
+}
+
+.flowers-top {
+    margin-bottom: 15px;
+}
+
+.flowers-bottom {
+    margin-top: 15px;
+    align-items: flex-start;
+}
+
+.flowers-bottom .photo-flower {
+    flex-direction: column-reverse;
+}
+
+/* Tallos más cortos para las flores de arriba/abajo */
+.stem-short {
+    height: 40px;
+}
+
+.stem-medium {
+    height: 60px;
+}
+
+/* Variante de color rosa claro */
+.flower-pink .mini-petal {
+    background: radial-gradient(ellipse at center, #ff80ab 0%, #ff4081 60%, #d81b60 100%);
+    box-shadow: inset -3px -3px 6px rgba(216, 27, 96, 0.4);
+}
+
+/* Delays para las flores superiores */
+.pf-top-1 .mini-flower { animation-delay: 0.2s; }
+.pf-top-2 .mini-flower { animation-delay: 0.6s; }
+.pf-top-3 .mini-flower { animation-delay: 1.0s; }
+.pf-top-1 .mini-stem { animation-delay: 0.4s; }
+.pf-top-2 .mini-stem { animation-delay: 0.8s; }
+.pf-top-3 .mini-stem { animation-delay: 1.2s; }
+
+/* Delays para las flores inferiores */
+.pf-bottom-1 .mini-flower { animation-delay: 0.3s; }
+.pf-bottom-2 .mini-flower { animation-delay: 0.7s; }
+.pf-bottom-3 .mini-flower { animation-delay: 1.1s; }
+.pf-bottom-1 .mini-stem { animation-delay: 0.5s; }
+.pf-bottom-2 .mini-stem { animation-delay: 0.9s; }
+.pf-bottom-3 .mini-stem { animation-delay: 1.3s; }
+
+/* Corazones flotantes alrededor de la foto */
+.photo-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.photo-heart {
+    position: absolute;
+    font-size: clamp(18px, 4vw, 28px);
+    animation: floatPhotoHeart 4s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.ph-1 { top: 0; left: 10%; animation-delay: 0s; }
+.ph-2 { top: 10%; right: 10%; animation-delay: 0.6s; }
+.ph-3 { bottom: 20%; left: 5%; animation-delay: 1.2s; }
+.ph-4 { bottom: 10%; right: 5%; animation-delay: 1.8s; }
+.ph-5 { top: 40%; left: 2%; animation-delay: 0.3s; }
+.ph-6 { top: 40%; right: 2%; animation-delay: 0.9s; }
+.ph-7 { top: 25%; left: 15%; animation-delay: 1.5s; }
+.ph-8 { bottom: 30%; right: 12%; animation-delay: 2.1s; }
+
+@keyframes floatPhotoHeart {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-15px) scale(1.2);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-frame {
+        width: min(250px, 65vw);
+    }
+
+    .mini-stem {
+        height: 60px;
+    }
+
+    .stem-short {
+        height: 30px;
+    }
+
+    .stem-medium {
+        height: 45px;
+    }
+
+    .mini-flower {
+        width: 40px;
+        height: 40px;
+    }
+
+    .mini-petal {
+        width: 18px;
+        height: 22px;
+    }
+
+    .mini-center {
+        width: 11px;
+        height: 11px;
+    }
+
+    .flowers-row {
+        gap: 15px;
     }
 }
