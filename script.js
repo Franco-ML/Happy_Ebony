@@ -19,15 +19,62 @@ const cards = document.querySelectorAll('.card-container');
 lockScreen.classList.add('active');
 
 // ============ CARTAS FLOTANTES ============
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        if (!card.classList.contains('opened')) {
-            card.classList.add('opened');
+function openCard(card) {
+    // Abrir carta
+    card.classList.add('opened');
 
-            // Sonido de apertura (opcional)
-            // new Audio('open.mp3').play();
-        } else {
-            card.classList.remove('opened');
+    // Atenuar las demás cartas
+    cards.forEach(otherCard => {
+        if (otherCard !== card) {
+            otherCard.style.opacity = '0';
+            otherCard.style.pointerEvents = 'none';
+        }
+    });
+
+    // Atenuar el candado
+    lock.parentElement.style.opacity = '0.2';
+    lock.parentElement.style.pointerEvents = 'none';
+
+    // Sonido de apertura (opcional)
+    // new Audio('open.mp3').play();
+}
+
+function closeCard(card) {
+    // Cerrar carta
+    card.classList.remove('opened');
+
+    // Restaurar las demás cartas
+    cards.forEach(otherCard => {
+        otherCard.style.opacity = '1';
+        otherCard.style.pointerEvents = 'all';
+    });
+
+    // Restaurar el candado
+    lock.parentElement.style.opacity = '1';
+    lock.parentElement.style.pointerEvents = 'all';
+}
+
+cards.forEach(card => {
+    // Click en el sobre para abrir
+    const envelope = card.querySelector('.envelope-front, .envelope-flap');
+    card.addEventListener('click', (e) => {
+        // Solo abrir si no está ya abierta y no se hizo click en el botón de cerrar
+        if (!card.classList.contains('opened') && !e.target.classList.contains('close-letter')) {
+            openCard(card);
+        }
+    });
+
+    // Click en el botón de cerrar
+    const closeBtn = card.querySelector('.close-letter');
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evitar que se propague al card
+        closeCard(card);
+    });
+
+    // Click en el backdrop (fondo oscuro) para cerrar
+    card.addEventListener('click', (e) => {
+        if (card.classList.contains('opened') && e.target === card) {
+            closeCard(card);
         }
     });
 });
@@ -92,12 +139,117 @@ function unlockSuccess() {
         card.style.transition = 'all 0.5s ease';
     });
 
-    // Esperar animación y cambiar de pantalla
+    // Esperar animación y cambiar a la pantalla de pregunta
     setTimeout(() => {
         lockScreen.classList.remove('active');
-        mainScreen.classList.add('active');
+        // mainScreen.classList.add('active'); // Antes iba directo a main
+        document.getElementById('questionScreen').classList.add('active');
     }, 1000);
 }
+
+// ============ LÓGICA DE PREGUNTA ============
+const btnYes = document.getElementById('btnYes');
+const btnNo = document.getElementById('btnNo');
+const questionScreen = document.getElementById('questionScreen');
+const successMessage = document.getElementById('successMessage');
+
+let noClickCount = 0;
+const noTexts = [
+    "No 💔",
+    "¿Seguro?",
+    "¡Piénsalo bien!",
+    "No me hagas esto...",
+    "¡Por favor!",
+    "¡Di que sí!"
+];
+
+const questionGif = document.getElementById('questionGif');
+
+// GIFs tristes para el botón "No" (Verificando que sean del oso MOCHA - el marrón)
+const sadGifs = [
+    "https://media.tenor.com/_MJO863M_sQAAAAi/milk-and-mocha-bear.gif", // Mocha crying at table
+    "https://media.tenor.com/15822365/milk-and-mocha-bear-crying-sad-gif", // Mocha crying hard
+    "https://media.tenor.com/26511675/mocha-crying-gif", // Mocha crying on floor
+    "https://media.tenor.com/18012648/milk-and-mocha-crying-sad-gif", // Mocha sobbing
+    "https://media.tenor.com/13233816/milk-mocha-milk-and-mocha-bears-please-plz.gif" // Mocha pleasing
+];
+
+btnNo.addEventListener('click', () => {
+    noClickCount++;
+
+    // Hacer más pequeño el botón No
+    const currentSizeNo = 1 - (noClickCount * 0.1);
+    btnNo.style.transform = `scale(${Math.max(0, currentSizeNo)})`;
+
+    // Si se hace muy pequeño, ocultarlo o moverlo (opcional, por ahora solo escala)
+
+    // Hacer más grande el botón Sí
+    const currentSizeYes = 1 + (noClickCount * 0.5);
+    btnYes.style.transform = `scale(${currentSizeYes})`;
+
+    // Cambiar texto del botón No
+    if (noClickCount < noTexts.length) {
+        btnNo.innerText = noTexts[noClickCount];
+    }
+
+    // Cambiar GIF a uno triste (ciclando)
+    const gifIndex = (noClickCount - 1) % sadGifs.length;
+    questionGif.src = sadGifs[gifIndex];
+});
+
+btnYes.addEventListener('click', () => {
+    // Ocultar pantalla de pregunta
+    questionScreen.style.opacity = '0';
+
+    // Mostrar mensaje de éxito
+    successMessage.classList.add('active');
+
+    // Lanzar confeti (opcional, si pudiéramos añadir librería)
+
+    // Esperar y mostrar jardín
+    setTimeout(() => {
+        successMessage.classList.remove('active');
+        questionScreen.classList.remove('active');
+        mainScreen.classList.add('active');
+    }, 3000);
+});
+
+// ============ MÚSICA DE FONDO ============
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+const startScreen = document.getElementById('startScreen');
+
+function toggleMusic() {
+    if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.textContent = '🔊';
+        musicBtn.classList.add('playing');
+    } else {
+        bgMusic.pause();
+        musicBtn.textContent = '🎵';
+        musicBtn.classList.remove('playing');
+    }
+}
+
+musicBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMusic();
+});
+
+// Pantalla de inicio para activar audio
+startScreen.addEventListener('click', () => {
+    bgMusic.play().then(() => {
+        musicBtn.textContent = '🔊';
+        musicBtn.classList.add('playing');
+
+        // Ocultar pantalla de inicio
+        startScreen.classList.add('hidden');
+    }).catch(error => {
+        console.log("Error al reproducir audio:", error);
+        // Aun si falla, ocultamos para no bloquear
+        startScreen.classList.add('hidden');
+    });
+});
 
 // ============ ANIMACIÓN DE ERROR ============
 function unlockError() {

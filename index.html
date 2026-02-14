@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz San Valentín 💕</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Pacifico&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <!-- Pantalla de Inicio (Para activar audio) -->
+    <div id="startScreen" class="start-screen">
+        <div class="start-content">
+            <h1>💌</h1>
+            <p>Haz clic para comenzar</p>
+        </div>
+    </div>
+
+    <!-- Música de Fondo -->
+    <audio id="bgMusic" loop>
+        <source src="music/Rauw Alejandro - Aquel Nap ZzZz (Audio Official) (1) (online-audio-converter.com).mp3"
+            type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Botón de Música -->
+    <button id="musicBtn" class="music-btn">🎵</button>
+
     <!-- Pantalla de Candado -->
     <div id="lockScreen" class="lock-screen active">
         <!-- Corazones flotantes de fondo -->
@@ -28,7 +50,24 @@
                     <div class="envelope-front"></div>
                     <div class="envelope-flap"></div>
                     <div class="letter">
-                        <p class="hint-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <button class="close-letter">✕</button>
+                        <div class="letter-header">
+                            <span class="kiss-mark">💋</span>
+                            <h3 class="letter-title">Para ti, mi amor</h3>
+                        </div>
+                        <p class="hint-text">
+                            Mi corazón late por ti desde aquel día especial...<br><br>
+
+                            Recuerda cuando todo comenzó,<br>
+                            el día que mi alma despertó.<br>
+                            Un número mágico, no muy grande,<br>
+                            doble de cuatro, ¿lo recuerdas constante?<br><br>
+
+                            Es el día que todo cambió,<br>
+                            cuando tu sonrisa me enamoró.<br><br>
+
+                            <span class="signature">Con amor eterno... 💕</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -38,7 +77,24 @@
                     <div class="envelope-front"></div>
                     <div class="envelope-flap"></div>
                     <div class="letter">
-                        <p class="hint-text">Sed do eiusmod tempor incididunt ut labore et dolore magna...</p>
+                        <button class="close-letter">✕</button>
+                        <div class="letter-header">
+                            <span class="kiss-mark">💋</span>
+                            <h3 class="letter-title">Dulce secreto</h3>
+                        </div>
+                        <p class="hint-text">
+                            Cada momento contigo es especial...<br><br>
+
+                            El mes donde la magia renace,<br>
+                            cuando todo se viste de paz.<br>
+                            Último del año, luces brillantes,<br>
+                            regalos y amor en instantes.<br><br>
+
+                            Doce campanadas sonarán,<br>
+                            y nuestro amor celebrarán.<br><br>
+
+                            <span class="signature">Tuyo por siempre... 💖</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -48,7 +104,24 @@
                     <div class="envelope-front"></div>
                     <div class="envelope-flap"></div>
                     <div class="letter">
-                        <p class="hint-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco...</p>
+                        <button class="close-letter">✕</button>
+                        <div class="letter-header">
+                            <span class="kiss-mark">💋</span>
+                            <h3 class="letter-title">Nuestro futuro</h3>
+                        </div>
+                        <p class="hint-text">
+                            Juntos construiremos nuestro camino...<br><br>
+
+                            El año que nos une y conecta,<br>
+                            veinticinco años en suma perfecta:<br>
+                            dos mil más veinticinco,<br>
+                            el futuro que te prometo y te digo.<br><br>
+
+                            Un año que apenas empieza,<br>
+                            donde nuestro amor nunca cesa.<br><br>
+
+                            <span class="signature">Por toda la eternidad... 💝</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -74,6 +147,39 @@
             <button id="unlockBtn" class="unlock-btn">Abrir Candado 💕</button>
             <p class="hint-message">Busca las pistas en las cartas flotantes...</p>
         </div>
+    </div>
+
+    <!-- Pantalla de Pregunta (oculta inicialmente) -->
+    <div id="questionScreen" class="question-screen">
+        <!-- GIFs Decorativos -->
+        <img src="https://i.pinimg.com/originals/bb/65/53/bb6553860420324d73f43ded9cdd82a3.gif" alt="Dancing Bear"
+            class="decorative-gif gif-bottom-left">
+        <img src="https://media.tenor.com/5vyx4r5ZXPsAAAAi/aw-its-so-cute.gif" alt="Happy Bear"
+            class="decorative-gif gif-bottom-right">
+        <img src="https://media.tenor.com/gnT8hrjgqlsAAAAi/milk-and-mocha.gif" alt="Hanging Bear"
+            class="decorative-gif gif-top-right">
+
+        <div class="question-container">
+            <h1 class="question-title">¿Quieres ser mi San Valentín? 💖</h1>
+            <div class="gif-container">
+                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Cute Bear"
+                    class="question-gif" id="questionGif">
+            </div>
+            <div class="buttons-container">
+                <button id="btnYes" class="btn-yes">¡Sí! 💕</button>
+                <button id="btnNo" class="btn-no">No 💔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensaje de Éxito (oculto inicialmente) -->
+    <div id="successMessage" class="success-message">
+        <h1 class="success-title">¡Sabía que dirías que sí! 🥰</h1>
+        <div class="gif-container">
+            <img src="https://i.pinimg.com/originals/bb/65/53/bb6553860420324d73f43ded9cdd82a3.gif" alt="Happy Bears"
+                class="success-gif">
+        </div>
+        <p class="love-text">Te amo muchísimo ❤️</p>
     </div>
 
     <!-- Pantalla de Rosas (oculta inicialmente) -->
@@ -135,4 +241,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
