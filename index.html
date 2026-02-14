@@ -4,61 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz San Valentín 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Feliz San Valentín</h1>
+    <!-- Pantalla de Candado -->
+    <div id="lockScreen" class="lock-screen active">
+        <!-- Corazones flotantes de fondo -->
+        <div class="hearts-background">
+            <div class="heart heart-1">❤️</div>
+            <div class="heart heart-2">💕</div>
+            <div class="heart heart-3">💖</div>
+            <div class="heart heart-4">💗</div>
+            <div class="heart heart-5">💝</div>
+        </div>
 
-        <div class="garden">
-            <!-- Rosa 1 -->
-            <div class="rose rose-1">
-                <div class="stem"></div>
-                <div class="leaf leaf-left"></div>
-                <div class="leaf leaf-right"></div>
-                <div class="flower">
-                    <div class="petal petal-1"></div>
-                    <div class="petal petal-2"></div>
-                    <div class="petal petal-3"></div>
-                    <div class="petal petal-4"></div>
-                    <div class="petal petal-5"></div>
-                    <div class="petal petal-6"></div>
-                    <div class="center"></div>
+        <!-- Cartas flotantes con pistas -->
+        <div class="floating-cards">
+            <div class="card-container card-1" data-hint="1">
+                <div class="envelope">
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap"></div>
+                    <div class="letter">
+                        <p class="hint-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Rosa 2 -->
-            <div class="rose rose-2">
-                <div class="stem"></div>
-                <div class="leaf leaf-left"></div>
-                <div class="leaf leaf-right"></div>
-                <div class="flower">
-                    <div class="petal petal-1"></div>
-                    <div class="petal petal-2"></div>
-                    <div class="petal petal-3"></div>
-                    <div class="petal petal-4"></div>
-                    <div class="petal petal-5"></div>
-                    <div class="petal petal-6"></div>
-                    <div class="center"></div>
+            <div class="card-container card-2" data-hint="2">
+                <div class="envelope">
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap"></div>
+                    <div class="letter">
+                        <p class="hint-text">Sed do eiusmod tempor incididunt ut labore et dolore magna...</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Rosa 3 -->
-            <div class="rose rose-3">
-                <div class="stem"></div>
-                <div class="leaf leaf-left"></div>
-                <div class="leaf leaf-right"></div>
-                <div class="flower">
-                    <div class="petal petal-1"></div>
-                    <div class="petal petal-2"></div>
-                    <div class="petal petal-3"></div>
-                    <div class="petal petal-4"></div>
-                    <div class="petal petal-5"></div>
-                    <div class="petal petal-6"></div>
-                    <div class="center"></div>
+            <div class="card-container card-3" data-hint="3">
+                <div class="envelope">
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap"></div>
+                    <div class="letter">
+                        <p class="hint-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candado y fecha -->
+        <div class="lock-container">
+            <div class="lock">
+                <div class="lock-body">
+                    <div class="keyhole"></div>
+                </div>
+                <div class="shackle"></div>
+            </div>
+
+            <h2 class="lock-title">Descubre la Fecha Mágica</h2>
+
+            <div class="date-input-container">
+                <input type="text" id="day" maxlength="2" placeholder="DD" class="date-input">
+                <span class="separator">/</span>
+                <input type="text" id="month" maxlength="2" placeholder="MM" class="date-input">
+                <span class="separator">/</span>
+                <input type="text" id="year" maxlength="4" placeholder="YYYY" class="date-input">
+            </div>
+
+            <button id="unlockBtn" class="unlock-btn">Abrir Candado 💕</button>
+            <p class="hint-message">Busca las pistas en las cartas flotantes...</p>
+        </div>
+    </div>
+
+    <!-- Pantalla de Rosas (oculta inicialmente) -->
+    <div id="mainScreen" class="main-screen">
+        <div class="container">
+            <h1 class="title">Feliz San Valentín</h1>
+
+            <div class="garden">
+                <!-- Rosa 1 -->
+                <div class="rose rose-1">
+                    <div class="stem"></div>
+                    <div class="leaf leaf-left"></div>
+                    <div class="leaf leaf-right"></div>
+                    <div class="flower">
+                        <div class="petal petal-1"></div>
+                        <div class="petal petal-2"></div>
+                        <div class="petal petal-3"></div>
+                        <div class="petal petal-4"></div>
+                        <div class="petal petal-5"></div>
+                        <div class="petal petal-6"></div>
+                        <div class="center"></div>
+                    </div>
+                </div>
+
+                <!-- Rosa 2 -->
+                <div class="rose rose-2">
+                    <div class="stem"></div>
+                    <div class="leaf leaf-left"></div>
+                    <div class="leaf leaf-right"></div>
+                    <div class="flower">
+                        <div class="petal petal-1"></div>
+                        <div class="petal petal-2"></div>
+                        <div class="petal petal-3"></div>
+                        <div class="petal petal-4"></div>
+                        <div class="petal petal-5"></div>
+                        <div class="petal petal-6"></div>
+                        <div class="center"></div>
+                    </div>
+                </div>
+
+                <!-- Rosa 3 -->
+                <div class="rose rose-3">
+                    <div class="stem"></div>
+                    <div class="leaf leaf-left"></div>
+                    <div class="leaf leaf-right"></div>
+                    <div class="flower">
+                        <div class="petal petal-1"></div>
+                        <div class="petal petal-2"></div>
+                        <div class="petal petal-3"></div>
+                        <div class="petal petal-4"></div>
+                        <div class="petal petal-5"></div>
+                        <div class="petal petal-6"></div>
+                        <div class="center"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
