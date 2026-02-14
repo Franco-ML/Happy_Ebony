@@ -173,6 +173,7 @@ body {
     transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 2;
     opacity: 1;
+    overflow: visible;
 }
 
 .card-container:hover {
@@ -261,6 +262,7 @@ body {
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 0.6s ease;
+    overflow: visible;
 }
 
 .card-container.opened .envelope {
@@ -278,6 +280,7 @@ body {
     backface-visibility: hidden;
     box-shadow: 0 4px 8px rgba(216, 27, 96, 0.3);
     z-index: 1;
+    overflow: visible;
 }
 
 .card-container.opened .envelope-front {
@@ -287,10 +290,11 @@ body {
 .envelope-front::before {
     content: '💌';
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 30px;
+    z-index: 3;
 }
 
 .envelope-flap {
